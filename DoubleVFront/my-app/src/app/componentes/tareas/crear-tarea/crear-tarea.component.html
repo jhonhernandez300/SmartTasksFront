@@ -1,0 +1,31 @@
+<div class="container">
+  <div id="second-container">
+    <mat-card id="header">
+      <mat-card-header>
+        <mat-card-title>GUARDAR TAREA</mat-card-title>
+        <mat-card-title>{{ usuario?.nombre }} - {{ usuario?.email }} - {{ usuario?.rolNombre }}</mat-card-title>
+      </mat-card-header>
+    </mat-card>
+
+    <form [formGroup]="myForm" id="the-form" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="fill" class="form-element">
+            <mat-label>Descripción</mat-label>
+            <input matInput formControlName="descripcion" placeholder="Descripción">
+            <mat-error *ngIf="submitted && myForm.get('descripcion')?.errors" class="error-message">
+              <div *ngIf="myForm.get('descripcion')?.hasError('required')">Requerido</div>
+              <div *ngIf="myForm.get('descripcion')?.hasError('minlength')">Al menos 3 caracteres</div>
+              <div *ngIf="myForm.get('descripcion')?.hasError('maxlength')">Hasta 30 caracteres</div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col" id="buttons">
+          <button mat-raised-button color="warn" (click)="onReset()">Limpiar</button>
+          <button mat-raised-button color="primary" type="submit">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

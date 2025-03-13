@@ -1,0 +1,21 @@
+.no-permission-card {
+    max-width: 400px;
+    margin: 100px auto;
+    text-align: center;
+    padding: 20px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+  }
+  
+  mat-card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #721c24;
+  }
+  
+  mat-card-content p {
+    font-size: 18px;
+    color: #721c24;
+  }
+  

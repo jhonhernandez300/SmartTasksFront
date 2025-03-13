@@ -1,0 +1,71 @@
+<div class="container pt-1">  
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title class="text-centered white-text" translate>TAREAS</mat-card-title>      
+      </mat-card-header>
+  
+      <mat-card-content>
+        <!-- Campo de búsqueda -->
+        <mat-card-content>
+          <!-- Campo de búsqueda -->
+          <mat-form-field *ngIf="rol == 'Administrador' || rol == 'Supervisor'" appearance="outline">
+            <mat-label>Buscar</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Filtrar tareas">
+          </mat-form-field>
+        </mat-card-content>        
+  
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">  
+          <!-- Columnas -->
+          <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef>Descripción</th>
+            <td mat-cell *matCellDef="let tarea">{{ tarea.descripcion }}</td>
+          </ng-container>
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let tarea">{{ tarea.estado }}</td>
+          </ng-container>
+          <ng-container matColumnDef="usuarioNombre">
+            <th mat-header-cell *matHeaderCellDef>Usuario nombre</th>
+            <td mat-cell *matCellDef="let tarea">{{ tarea.usuarioNombre }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let tarea">
+              <button *ngIf="rol == 'Administrador'" mat-raised-button color="warn" (click)="delete(tarea.tareaId)">Borrar</button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let tarea">
+              <button *ngIf="rol == 'Administrador' || rol == 'Supervisor'" mat-raised-button color="primary" (click)="update(tarea)">Actualizar</button>
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+  
+        <!-- Paginador -->
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  
+        <div *ngIf="showDiv" class="temporary-div">{{ errorMessage }}</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+    <!--<ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let employee">
+              <button mat-raised-button color="warn" (click)="delete(employee.id)">{{ 'DELETE' | translate }}</button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let employee">
+              <button mat-raised-button color="primary" (click)="update(employee)">{{ 'UPDATE' | translate }}</button>
+            </td>
+          </ng-container> -->
+  
+

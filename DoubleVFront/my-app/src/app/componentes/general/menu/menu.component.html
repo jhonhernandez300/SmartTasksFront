@@ -1,0 +1,19 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item [routerLink]="'/obtener-todas-tareas'">
+      <mat-icon>task</mat-icon>
+      <span>Obtener Todas las Tareas</span>
+    </button>
+    <button mat-menu-item [routerLink]="'/guardar-usuario'">
+      <mat-icon>person_add</mat-icon>
+      <span>Guardar Usuario</span>
+    </button>
+    <button mat-menu-item [routerLink]="'/obtener-todos-usuarios'">
+      <mat-icon>group</mat-icon>
+      <span>Obtener Todos los Usuarios</span>
+    </button>    
+  </mat-menu>
+  

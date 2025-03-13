@@ -1,0 +1,44 @@
+<div class="container">
+    <div id="second-container">
+      <mat-card id="header">
+        <mat-card-header>
+          <mat-card-title>ACTUALIZR TAREA</mat-card-title>
+          <mat-card-subtitle *ngIf="tarea?.usuarioNombre">
+            Usuario: {{ tarea?.usuarioNombre }}
+          </mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+  
+      <form [formGroup]="myForm" id="the-form" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="fill" class="form-element">
+              <mat-label>Descripción</mat-label>
+              <input matInput formControlName="descripcion" placeholder="Descripción">
+              <mat-error *ngIf="submitted && myForm.get('descripcion')?.errors" class="error-message">
+                <div *ngIf="myForm.get('descripcion')?.hasError('required')">Requerido</div>
+                <div *ngIf="myForm.get('descripcion')?.hasError('minlength')">Al menos 3 caracteres</div>
+                <div *ngIf="myForm.get('descripcion')?.hasError('maxlength')">Hasta 30 caracteres</div>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Estado</mat-label>
+                <mat-select formControlName="estado">
+                  <!-- Usa la lista de estados para generar las opciones del dropdown -->
+                  <mat-option *ngFor="let estado of estados" [value]="estado">
+                    {{ estado }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+          </div>
+  
+          <div class="col" id="buttons">
+            <button mat-raised-button color="warn" (click)="onReset()">Limpiar</button>
+            <button mat-raised-button color="primary" type="submit">Guardar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

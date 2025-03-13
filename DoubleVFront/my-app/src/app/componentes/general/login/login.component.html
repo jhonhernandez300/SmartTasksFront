@@ -1,0 +1,38 @@
+<div class="container">
+  <div id="second-container" >
+    <mat-card class="login-card">
+      <mat-card-header>
+        <mat-card-title>LOGIN</mat-card-title>
+      </mat-card-header>
+    </mat-card>
+
+    <form [formGroup]="myForm" id="the-form" (ngSubmit)="onSubmit()">
+      <div class="form-container">
+        <mat-form-field appearance="fill" class="full-width form-element">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="Correo" placeholder="Correo">
+          <mat-error *ngIf="submitted && form['Correo'].errors">
+            <div *ngIf="form['Correo']?.errors?.['required']">Requerido</div>
+            <div *ngIf="form['Correo']?.errors?.['minlength']">Al menos 8 caracteres</div>
+            <div *ngIf="form['Correo']?.errors?.['maxlength']">Hasta 30 caracteres</div>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width form-element">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="Password" type="Password" placeholder="Password">
+          <mat-error *ngIf="submitted && form['Password'].errors">
+            <div *ngIf="form['Password']?.errors?.['required']">Requerido</div>
+            <div *ngIf="form['Password']?.errors?.['minlength']">Al menos 8 caracteres</div>
+            <div *ngIf="form['Password']?.errors?.['maxlength']">Hasta 30 caracteres</div>
+          </mat-error>
+        </mat-form-field>
+
+        <div class="button-group">
+          <button mat-raised-button color="warn" (click)="onReset()">Limpiar</button>
+          <button mat-raised-button color="primary" type="submit">Login</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

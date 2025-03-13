@@ -1,0 +1,69 @@
+<div class="container pt-1">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title class="text-centered white-text" translate>EMPLEADOS</mat-card-title>      
+      </mat-card-header>
+  
+      <mat-card-content>
+        <!-- Campo de búsqueda -->
+        <mat-form-field appearance="outline">
+          <mat-label>Buscar</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Filtrar empleados">
+        </mat-form-field>
+  
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">  
+          <!-- Columnas -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let usuarios">{{ usuarios.nombre }}</td>
+          </ng-container>
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let usuarios">{{ usuarios.email }}</td>
+          </ng-container>
+          <ng-container matColumnDef="rolNombre">
+            <th mat-header-cell *matHeaderCellDef>Rol Nombre</th>
+            <td mat-cell *matCellDef="let usuarios">{{ usuarios.rolNombre }}</td>
+          </ng-container>
+          
+           <ng-container  matColumnDef="darTarea">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let usuarios">
+              <button *ngIf="rol == 'Administrador' || rol == 'Supervisor'" mat-raised-button color="primary" (click)="darTarea(usuarios)">Dar Tarea</button>
+            </td>
+          </ng-container>       
+          
+          <ng-container  matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let usuarios">
+              <button *ngIf="rol == 'Administrador'" mat-raised-button color="warn" (click)="delete(usuarios.usuarioId)">Borrar</button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let usuarios">
+              <button *ngIf="rol == 'Administrador'" mat-raised-button color="accent" (click)="update(usuarios)">Actualizar</button>
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+  
+        <!-- Paginador -->
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  
+        <div *ngIf="showDiv" class="temporary-div">{{ errorMessage }}</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+    <!--
+          <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let employee">
+              <button mat-raised-button color="primary" (click)="update(employee)">{{ 'UPDATE' | translate }}</button>
+            </td>
+          </ng-container> -->
+  
